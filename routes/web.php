@@ -18,4 +18,4 @@ use App\Models\Post;
 
 Route::get('/posts', [PostController::class, 'index']);
 
-Route::get('/posts/{id}', [PostController::class, 'show']);
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('post');
