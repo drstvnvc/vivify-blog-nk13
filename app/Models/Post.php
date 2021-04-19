@@ -9,7 +9,7 @@ class Post extends Model
 {
   use HasFactory;
 
-  protected $fillable = [ 'title', 'body', 'is_published' ];
+  protected $fillable = ['title', 'body', 'is_published'];
 
   public static function published()
   {
@@ -24,5 +24,10 @@ class Post extends Model
   public function getRandomNumber()
   {
     return 4;
+  }
+
+  public function comments()
+  {
+    return $this->hasMany(Comment::class);
   }
 }

@@ -3,15 +3,21 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreatePostRequest;
 
 class PostController extends Controller
 {
   public function index()
   {
+    DB::listen(function ($query) { // callback which is called for each query executed in this method
+      info($query->sql); // print sql into storage/logs/laravel.log file
+    });
     $posts = Post::published()
+      ->with('comments')
       ->orderBy('title')
       ->get();
     return view('posts.index', compact('posts'));
@@ -22,6 +28,8 @@ class PostController extends Controller
     if (!$post->is_published) {
       throw new ModelNotFoundException();
     }
+    // $comments = Comment::where('post_id', $post->id)->get();
+
     return view('posts.show', compact('post'));
   }
 
