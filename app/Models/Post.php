@@ -9,12 +9,15 @@ class Post extends Model
 {
   use HasFactory;
 
+  protected $fillable = [ 'title', 'body', 'is_published' ];
 
-  public static function published() {
+  public static function published()
+  {
     return self::where('is_published', true);
   }
 
-  public static function unpublished() {
+  public static function unpublished()
+  {
     return self::where('is_published', false);
   }
 

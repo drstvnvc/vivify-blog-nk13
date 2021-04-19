@@ -23,4 +23,29 @@ class PostController extends Controller
     }
     return view('posts.show', compact('post'));
   }
+
+  public function create()
+  {
+    return view('posts.create');
+  }
+
+  public function store(Request $request)
+  {
+    // $post = new Post;
+    // $post->title = $request->get('title');
+    // $post->body = $request->get('body');
+    // $post->is_published = $request->get('is_published', false);
+
+    // $post->save();
+
+    $data = $request->validate([
+      'title' => 'required|string|max:255|unique:posts',
+      'body' =>  ['required', 'string', 'max:1000'], // 'required|string|max:1000',
+      'is_published' => 'sometimes'
+    ]);
+
+    $newPost = Post::create($data);
+
+    return redirect('/posts');
+  }
 }
