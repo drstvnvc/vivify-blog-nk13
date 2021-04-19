@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreatePostRequest;
 
 class PostController extends Controller
 {
@@ -29,7 +30,7 @@ class PostController extends Controller
     return view('posts.create');
   }
 
-  public function store(Request $request)
+  public function store(CreatePostRequest $request)
   {
     // $post = new Post;
     // $post->title = $request->get('title');
@@ -38,12 +39,7 @@ class PostController extends Controller
 
     // $post->save();
 
-    $data = $request->validate([
-      'title' => 'required|string|max:255|unique:posts',
-      'body' =>  ['required', 'string', 'max:1000'], // 'required|string|max:1000',
-      'is_published' => 'sometimes'
-    ]);
-
+    $data = $request->validated();
     $newPost = Post::create($data);
 
     return redirect('/posts');
