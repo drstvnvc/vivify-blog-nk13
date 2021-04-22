@@ -11,6 +11,11 @@
         <li class="nav-item">
           <a class="nav-link" href="/posts/create">Create a post</a>
         </li>
+        @if (auth()->check())
+        <li class="nav-item">
+          {{ auth()->user()->name }}
+        </li>
+        @endif
       </ul>
     </div>
   </div>

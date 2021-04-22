@@ -1,10 +1,9 @@
 <?php
 
 use App\Http\Controllers\CommentController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PostController;
-use App\Models\Post;
+use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +23,7 @@ Route::post('/posts', [PostController::class, 'store']);
 
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('post');
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('createComment');
+
+Route::get('/register', [AuthController::class, 'getRegisterForm']);
+Route::post('/register', [AuthController::class, 'register']);
+// Route::get('/login', [AuthController::class, ''])
