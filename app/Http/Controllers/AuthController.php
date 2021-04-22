@@ -29,4 +29,27 @@ class AuthController extends Controller
     auth()->logout();
     return back();
   }
+
+  public function getLoginForm()
+  {
+    return view('auth.login');
+  }
+
+  public function login(Request $request)
+  {
+    $credentials = [
+      'email' => $request->input('email'),
+      'password' => $request->input('password')
+    ];
+    if (auth()->attempt($credentials)) {
+      return redirect('/posts');
+    }
+    // $user = User::where('email', $request->get('email'))->first();
+    // if ($user && Hash::check($request->input('password'), $user->password)) {
+    //   auth()->login($user);
+    //   return redirect('/posts');
+    // }
+
+    return view('auth.login', ['invalid_credentials' => true]);
+  }
 }

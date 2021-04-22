@@ -27,4 +27,6 @@ Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name
 Route::get('/register', [AuthController::class, 'getRegisterForm']);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout']);
+Route::get('/login', [AuthController::class, 'getLoginForm']);
+Route::post('/login', [AuthController::class, 'login']);
 // Route::get('/login', [AuthController::class, ''])
