@@ -23,4 +23,10 @@ class AuthController extends Controller
     auth()->login($newUser);
     return redirect('/posts');
   }
+
+  public function logout()
+  {
+    auth()->logout();
+    return back();
+  }
 }

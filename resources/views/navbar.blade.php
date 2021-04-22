@@ -1,22 +1,42 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="/posts">
       Vivify Blog
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/posts">All posts</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/posts/create">Create post</a>
+      </li>
+      @auth
         <li class="nav-item">
-          <a class="nav-link" href="/posts/create">Create a post</a>
+          <strong> Username: {{ auth()->user()->name }} </strong>
         </li>
-        @if (auth()->check())
         <li class="nav-item">
-          {{ auth()->user()->name }}
+          <form action="/logout" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-primary">Logout</button>
+          </form>
         </li>
-        @endif
-      </ul>
-    </div>
+      @else
+        <li class="nav-item">
+          <a class="nav-link" href="/register">Sign up</a>
+        </li>
+      @endauth
+    </ul>
   </div>
 </nav>
+
+<style>
+  .navbar-nav {
+    flex-direction: row !important;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    text-transform: capitalize
+  }
+</style>
