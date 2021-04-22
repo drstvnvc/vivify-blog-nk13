@@ -7,10 +7,10 @@
       <li class="nav-item">
         <a class="nav-link" href="/posts">All posts</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/posts/create">Create post</a>
-      </li>
       @auth
+        <li class="nav-item">
+          <a class="nav-link" href="/posts/create">Create post</a>
+        </li>
         <li class="nav-item">
           <strong> Username: {{ auth()->user()->name }} </strong>
         </li>
@@ -35,6 +35,7 @@
 <style>
   .navbar-nav {
     flex-direction: row !important;
+    align-items: center;
   }
   .nav-item {
     display: flex;
