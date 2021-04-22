@@ -4,6 +4,9 @@
 
 @section('content')
 <h2>{{$post->title}}</h2>
+<div>Author: {{ $post->user->name }} </div>
+<div>Number of posts of this author: {{ $post->user->posts->count() }}</div>
+<hr />
 <p>{{$post->body}}</p>
 <h5>Comments</h5>
 <ul>

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\CreatePostRequest;
+use App\Models\User;
 
 class PostController extends Controller
 {
@@ -48,7 +49,7 @@ class PostController extends Controller
     // $post->save();
 
     $data = $request->validated();
-    $newPost = Post::create($data);
+    $newPost = auth()->user()->posts()->create($data);
 
     return redirect('/posts');
   }
