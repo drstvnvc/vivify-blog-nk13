@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Http\Requests\CreateCommentRequest;
+use App\Mail\CommentReceived;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -17,7 +19,10 @@ class CommentController extends Controller
   {
     $data = $request->validated();
 
-    $post->comments()->create($data);
+    $comment = $post->comments()->create($data);
+
+    Mail::to($post->author)
+      ->send(new CommentReceived($comment, auth()->user()));
 
     return back();
   }
