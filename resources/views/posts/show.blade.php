@@ -4,7 +4,7 @@
 
 @section('content')
 <h2>{{$post->title}}</h2>
-<div>Author: {{ $post->author->name }} </div>
+<div>Author: <a href="{{ route('user', [ 'user' => $post->author ]) }}">{{ $post->author->name }}</a> </div>
 <div>Number of posts of this author: {{ $post->author->posts->count() }}</div>
 <hr />
 <p>{{$post->body}}</p>
