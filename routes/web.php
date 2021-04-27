@@ -25,9 +25,9 @@ Route::post('/posts', [PostController::class, 'store'])->middleware('auth');
 Route::get('/posts/{post}', [PostController::class, 'show'])->name('post');
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('createComment');
 
-Route::group([ 'middleware' => 'guest' ], function () {
+Route::group(['middleware' => 'guest'], function () {
   Route::get('/register', [AuthController::class, 'getRegisterForm']);
-  Route::post('/register', [AuthController::class, 'register']);
+  Route::post('/register', [AuthController::class, 'register'])->middleware('checkAge');
   Route::get('/login', [AuthController::class, 'getLoginForm'])->name('login');
   Route::post('/login', [AuthController::class, 'login']);
 });
