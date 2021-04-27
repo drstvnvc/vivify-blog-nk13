@@ -12,26 +12,30 @@ use App\Models\User;
 
 class PostController extends Controller
 {
-  public function index()
+  public function index(Request $request)
   {
     DB::listen(function ($query) { // callback which is called for each query executed in this method
       info($query->sql); // print sql into storage/logs/laravel.log file
     });
+
     $posts = Post::published()
-      ->with('comments')
+      ->with(['comments', 'tags'])
       ->orderBy('title')
-      ->paginate(15);
+      ->paginate($request->query('perPage', 15));
     return view('posts.index', compact('posts'));
   }
 
   public function show(Post $post)
   {
-
+    DB::listen(function ($query) { // callback which is called for each query executed in this method
+      info($query->sql); // print sql into storage/logs/laravel.log file
+    });
     if (!$post->is_published) {
       throw new ModelNotFoundException();
     }
     // $comments = Comment::where('post_id', $post->id)->get();
 
+    $post->load(['comments', 'tags', 'author.posts']);
     return view('posts.show', compact('post'));
   }
 
