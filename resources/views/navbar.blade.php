@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="/posts">
-      Vivify Blog
+      Vivify Blog (num of requests: {{ session('requests_count') }})
     </a>
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">

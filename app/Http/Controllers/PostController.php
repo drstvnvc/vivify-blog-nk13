@@ -51,6 +51,8 @@ class PostController extends Controller
     $data = $request->validated();
     $newPost = auth()->user()->posts()->create($data);
 
+    $request->session()
+      ->flash('status_message', 'You have successfully created a post');
     return redirect('/posts');
   }
 }
