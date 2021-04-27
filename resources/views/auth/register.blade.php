@@ -58,6 +58,20 @@
     @enderror
   </div>
 
+  <div class="form-group">
+    <label for="password_confirmation">Date of birth</label>
+    <input
+      type="date"
+      class="form-control @error('date_of_birth') is-invalid @enderror"
+      id="date_of_birth"
+      aria-describedby="date_of_birthHelp"
+      placeholder="Date of birth"
+      name="date_of_birth">
+    @error('date_of_birth')
+      <div class="alert alert-danger">{{$message}}</div>
+    @enderror
+  </div>
+
   <div class="form-check">
     <input type="checkbox" class="form-check-input" id="agreed" name="agreed" value="1">
     <label class="form-check-label" for="agreed">I agree to terms and conditions</label>

@@ -27,7 +27,7 @@ Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name
 
 Route::group(['middleware' => 'guest'], function () {
   Route::get('/register', [AuthController::class, 'getRegisterForm']);
-  Route::post('/register', [AuthController::class, 'register'])->middleware('checkAge');
+  Route::post('/register', [AuthController::class, 'register']);
   Route::get('/login', [AuthController::class, 'getLoginForm'])->name('login');
   Route::post('/login', [AuthController::class, 'login']);
 });
