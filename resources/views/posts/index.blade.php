@@ -13,4 +13,12 @@
     </li>
   @endforeach
 </ul>
+<div>{{ $posts->onEachSide(1)->links() }}</div>
+
+<style>
+  svg {
+      width: 20px;
+  }
+</style>
+
 @endsection

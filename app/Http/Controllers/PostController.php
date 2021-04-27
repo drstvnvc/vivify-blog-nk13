@@ -20,12 +20,13 @@ class PostController extends Controller
     $posts = Post::published()
       ->with('comments')
       ->orderBy('title')
-      ->get();
+      ->paginate(15);
     return view('posts.index', compact('posts'));
   }
 
   public function show(Post $post)
   {
+
     if (!$post->is_published) {
       throw new ModelNotFoundException();
     }
